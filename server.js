@@ -16,6 +16,9 @@ app.use(cors());
 
 // Initialize the main project folder
 app.use(express.static('website'));
+// Initialize the main images folder
+app.use('/website/img',express.static('website/img'));
+
 
 // Setup Server
 const port = 3000;
@@ -26,17 +29,21 @@ app.listen(port, ()=> {
 // Setup empty JS object to act as endpoint for all routes
 projectData = {};
 
-// Post Weather data
+// get route
+app.get('/all', (req,res)=>{
+    res.send(projectData);
+});
+
+// Post the new Weather data
 app.post('/add', (req, res)=>{
     projectData = {
+        icon: req.body.icon,
         date: req.body.date,
+        city: req.body.city,
         temp: req.body.temp,
+        desc: req.body.desc,
         content: req.body.content,
     }
     res.send(projectData);
 });
 
-// get route
-app.get('/all', (req,res)=>{
-    res.send(projectData);
-});
