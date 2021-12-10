@@ -18,7 +18,7 @@ let d = new Date();
 let newDate = d.getMonth()+1+'.'+ d.getDate()+'.'+ d.getFullYear();
 
 // Event Listener
-generate.addEventListener('click',(e)=>{
+generate.addEventListener('click',()=>{
     // assign the values the user has entered to variables
     const newZip = document.querySelector('#zip').value;
     const newCity = document.querySelector('#cityName').value;
@@ -135,3 +135,11 @@ const updateUI = async (url = '') => {
         console.log('error', error);
     }
 }
+
+// show only result and hide input section
+generate.addEventListener('click',()=>{
+    document.querySelector('#zipDiv').remove();
+    document.querySelector('#cityDiv').remove();
+    document.querySelector('#feelingDiv').remove();
+    document.querySelector('#backBtn').style.visibility = 'visible';
+})

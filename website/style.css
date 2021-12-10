@@ -45,7 +45,7 @@ header {
 #app{
     display: grid;
     height: max-content;
-    width: max-content;
+    width: 100%;
     place-items: center;
     grid-auto-rows: repeat(auto-fit, 1fr) ;
     grid-template-columns: repeat(auto-fit,1fr);
@@ -58,7 +58,7 @@ header {
     font-family: 'Oswald', sans-serif;
     grid-area: Main;
     border-radius: 10%;
-    padding-top: 10%;
+    margin-top: 1%;
     opacity: 0.9;
 }
 
@@ -79,29 +79,34 @@ header {
     
 }
 
-.entry{
-    background: rgba(0, 0, 0, 0.4);
+#entryHolder{
+    width: max-content;
+    text-align: left;
+    font-size: 2rem;
 }
 
-
-#date{
-
+#backBtn{
+    visibility: hidden;
+    border-radius: 1em 0em 2em 3em;
+    padding: 0.1em;
+    margin-bottom: 30%;
 }
 
-#temp{
-
+#zipDiv{
+    visibility: visible;
 }
 
-#content{
+#cityDiv{
+    visibility: visible;
+}
 
+#feelingDiv{
+    visibility: visible;
 }
 
 .headline {
     border-radius: 33%;
     background: rgba(18, 18, 18, 0.5);
-
-}
-.title{
 
 }
 
@@ -127,7 +132,7 @@ button{
     width: fit-content;
     height: fit-content;
     margin-top: 10%;
-    background: #000d29;
+    background: #002935;
     color: #ffffff;
     font-size: 2rem;
     font-family: 'Oswald', sans-serif;
@@ -139,16 +144,6 @@ h1{
     padding: 0.3em;
 }
 
-/* textarea{
-    height: fit-content;
-    width: 80%;
-    background:#004f64;
-    color: #ffffff;
-    font-size: 1.1rem;
-    font-family: 'Oswald', sans-serif;
-    resize: none;
-} */
-/* Reset style for HTML element on active to have no border*/
 input:focus,
 select:focus,
 textarea:focus,
