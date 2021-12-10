@@ -11,11 +11,10 @@ const temp = document.querySelector('#temp');
 const desc = document.querySelector('#desc');
 const content = document.querySelector('#content');
 const generate = document.querySelector('#generate');
-const backError = document.querySelector('#backError');
 
 // Create a new date instance dynamically with JS
 let d = new Date();
-let newDate = d.getMonth()+1+'.'+ d.getDate()+'.'+ d.getFullYear();
+let newDate = d.toDateString();
 
 // Event Listener
 generate.addEventListener('click',()=>{
@@ -27,33 +26,43 @@ generate.addEventListener('click',()=>{
     // if the user enter a zip code we use it first, if not we can use city name
     if(newZip != 0){
         // use zip code to execute
-        getWeatherByZipCode(apiZipURL, newZip, apiKey)
-        .then((data) => {
-                // add the new data to the post route 
-                postData('/add', {
-                    icon: data.weather[0].icon,
-                    date: newDate,
-                    city: data.name,
-                    temp: data.main.temp,
-                    desc: data.weather[0].description,
-                    content: feelings
-                });return data
-            })
+        getWeatherByZipCode(apiZipURL, newZip, apiKey).then((data) => {
+
+            // show the error message back form api to the user
+            if(data.cod != 200){
+                return alert(data.message)
+            }
+
+            // add the new data to the post route 
+            postData('/add', {
+                icon: data.weather[0].icon,
+                date: newDate,
+                city: data.name,
+                temp: data.main.temp,
+                desc: data.weather[0].description,
+                content: feelings
+            });
+            return data
+        })
     }
     else{
         // use city name to execute
-        getWeatherByCityName(apiCityURL, newCity, apiKey)
-        .then((data) => {
-                // add the new data to the post route
-                postData('/add', {
-                    icon: data.weather[0].icon,
-                    date: newDate,
-                    city: data.name,
-                    temp: data.main.temp,
-                    desc: data.weather[0].description,
-                    content: feelings
-                });
-            })
+        getWeatherByCityName(apiCityURL, newCity, apiKey).then((data) => {
+
+            // show the error message back form api to the user
+            if(data.cod != 200)
+                return alert(data.message)
+
+            // add the new data to the post route
+            postData('/add', {
+                icon: data.weather[0].icon,
+                date: newDate,
+                city: data.name,
+                temp: data.main.temp,
+                desc: data.weather[0].description,
+                content: feelings
+            });
+        })
     }
 });
 
@@ -66,7 +75,7 @@ const getWeatherByZipCode = async (apiZipURL, zip, apiKey) => {
         return data;
     }
     catch(error) {
-        console.log('error', error);
+        console.log('error');
     }
 };
 
@@ -137,7 +146,7 @@ const updateUI = async (url = '') => {
 }
 
 // show only result and hide input section
-generate.addEventListener('click',()=>{
+generate.addEventListener('click',function hide(){
     document.querySelector('#zipDiv').remove();
     document.querySelector('#cityDiv').remove();
     document.querySelector('#feelingDiv').remove();

@@ -22,17 +22,13 @@ app.use('/website/img',express.static('website/img'));
 
 // Setup Server
 const port = 3000;
-app.listen(port, ()=> {
-    console.log(`server running on: ${port}`)
-});
+app.listen(port, ()=>console.log(`server running on: ${port}`));
 
 // Setup empty JS object to act as endpoint for all routes
 projectData = {};
 
 // get route
-app.get('/all', (req,res)=>{
-    res.send(projectData);
-});
+app.get('/all', (req,res)=>res.send(projectData).status(200).end);
 
 // Post the new Weather data
 app.post('/add', (req, res)=>{
@@ -44,6 +40,6 @@ app.post('/add', (req, res)=>{
         desc: req.body.desc,
         content: req.body.content,
     }
-    res.send(projectData);
+    res.send(projectData).status(200).end;
 });
 
