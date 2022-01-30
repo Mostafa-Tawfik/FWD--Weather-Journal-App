@@ -1,7 +1,7 @@
 /* Global Variables */
 // API URLs and key
-const apiZipURL = 'http://api.openweathermap.org/data/2.5/weather?zip=';
-const apiCityURL = 'http://api.openweathermap.org/data/2.5/weather?q=';
+const apiZipURL = 'https://api.openweathermap.org/data/2.5/weather?zip=';
+const apiCityURL = 'https://api.openweathermap.org/data/2.5/weather?q=';
 const apiKey = '&appid=920bb21d314b406a5d181848b9f28d1d&units=metric';
 
 const icon = document.querySelector('#icon');
