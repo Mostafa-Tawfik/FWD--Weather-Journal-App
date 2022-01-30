@@ -21,7 +21,7 @@ app.use('/website/img',express.static('website/img'));
 
 
 // Setup Server
-const port = 3000;
+const port = process.env.PORT || 3000;
 app.listen(port, ()=>console.log(`server running on: ${port}`));
 
 // Setup empty JS object to act as endpoint for all routes
